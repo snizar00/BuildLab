@@ -38,7 +38,7 @@ export class PrioritZDnDRanking implements ComponentFramework.ReactControl<IInpu
         return React.createElement(PriorityComponent, {
             width: context.mode.allocatedWidth,
             height: context.mode.allocatedHeight,
-            itemHeight: context.parameters.ItemHeight.raw,
+            itemHeight: context.parameters.ItemHeight.raw,  
             fontSize: context.parameters.FontSize.raw,
             fontColor: context.parameters.FontColor.raw,
             dataset: dataset,
@@ -75,4 +75,4 @@ export class PrioritZDnDRanking implements ComponentFramework.ReactControl<IInpu
         this.context.parameters.items.setSelectedRecordIds([sourceId, destinationId]);
     };
 
-}
+    }
