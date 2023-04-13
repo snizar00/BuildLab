@@ -1,0 +1,17 @@
+.prioritydnd-scroll-container {
+    box-sizing: border-box;
+    padding: 2px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+}
+
+.prioritydnd-item-container {       
+    user-select: none;
+    display: flex;
+    align-items: center;
+}
+
+.prioritydnd-item-column {
+    margin: 8px;
+}
