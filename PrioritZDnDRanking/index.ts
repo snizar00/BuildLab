@@ -1,8 +1,13 @@
 import { IInputs, IOutputs } from "./generated/ManifestTypes";
-import { HelloWorld, IHelloWorldProps } from "./HelloWorld";
-import * as React from "react";
+//import { HelloWorld, IHelloWorldProps } from "./HelloWorld";
+import { PriorityComponent, PriorityComponentProps } from "./PriorityComponent";
+import * as React from "react";     
 
 export class PrioritiZDnDRanking implements ComponentFramework.ReactControl<IInputs, IOutputs> {
+    
+    private context: ComponentFramework.Context<IInputs>;
+    private items: ComponentFramework.PropertyTypes.DataSet;
+    
     private theComponent: ComponentFramework.ReactControl<IInputs, IOutputs>;
     private notifyOutputChanged: () => void;
 
@@ -18,11 +23,14 @@ export class PrioritiZDnDRanking implements ComponentFramework.ReactControl<IInp
      * @param notifyOutputChanged A callback method to alert the framework that the control has new outputs ready to be retrieved asynchronously.
      * @param state A piece of data that persists in one session for a single user. Can be set at any point in a controls life cycle by calling 'setControlState' in the Mode interface.
      */
-    public init(
+    public i        nit(
         context: ComponentFramework.Context<IInputs>,
         notifyOutputChanged: () => void,
         state: ComponentFramework.Dictionary
     ): void {
+        this.context = context;
+        context.mode.trackContainerResize(true);
+                
         this.notifyOutputChanged = notifyOutputChanged;
     }
 
