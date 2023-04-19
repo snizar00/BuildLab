@@ -1,0 +1,112 @@
+Steps:
+First Part
+	1. login to GitHub
+	2. create workspace
+	3. click code (to clone a repo) --> Codespaces -> New codespace
+	4. Click extensions -> Search Power Platform -> install PPTools in codespace
+	5. click 'pac' in terminal to verify
+	6. click on PPTools in left bar and type:
+		○ pac auth create --url https://contosodev1.crm.dynamics.com -dc
+	7. Copy CODE and click link -> paste code to login -> select user -> close TAB
+	8. terminal -> clear
+	9. Refresh Auth -> you will see all profiles + environments
+		○ you should see 3 environments (build, dev, prod)
+	10. select 'auth' profile and star it
+	11. goto file tab
+	12. mkdir solutions
+	13. mkdir controls
+	14. cd solutions -> ls
+	15. mkdir mysolution
+	16. cd mysolution
+	17. (step-33/69) pac solution init -pp mysol -pn MySolution -o ./.
+	18. ls -l
+	19. cd controls
+	20. cd LinearInputControl
+	21. pac pcf init -ns LinearInputControl -n LinearInputControl -o ./. -npm --template field
+
+The code installed the relevant NPM libraries needed to build and found 0 vulnerabilities. 
+Since Alejandro's JavaScript skills are minimal, he uses a sample JavaScript file, 
+which he drags from his desktop and drops into the LinearInputControl folder.
+
+	22. Copy linear control folder into LinearInputControl folder
+	23. In terminal type
+		○ npm run build
+		○ npm run start
+		○ open in browser
+	24. upon verification, close the tab
+	25. In terminal type
+		○ cd ..
+		○ cd ..
+		○ cd solutions
+		○ cd mysolution
+		○ pac solution add-reference --path ../../controls/LinearInputControl/
+		○ clear
+		○ dotnet build
+	26. In the explorer blad, open solutions/mysolution/bin/debug/
+		○ you can see mysolution.zip
+		○ open src/Other folder
+		○ open Customizations.xml
+		○ open Relationships.xml
+		○ open Solution.xml
+			§ Solution.xml has actually received information because Alejandro associated the PCF control directly into the solution so it has that reference.
+		○ open index.ts in controls/LinearInputControl
+			§ The index.ts file is the TypeScript file used to build the JavaScript module
+		○ use 'pac solution import' to being the zip file into the Dev environment
+		○ pac solution import --path ./bin/Debug/mysolution.zip
+	27. Open maker portal -> Dev Environment -> Solutions -> You can see the solution, Click mysolution -> you can see the custom control.
+
+
+Second Part
+	1. Open GitHub Marketplace --> Power Platform --> powerplatform-actions --> 'Use latest version' --> choose top version
+	2. Click <> Code --> Actions --> set up a workflow yourself
+	3. Copy/Paste "release-solution-to-prod.yml"
+		a. Copy the Action name and paste that as the YAML file name.
+	
+	************ Need to get below information from Azure from the App Registration ************
+	4. Copy Tenant ID -> Client ID -> Build Environment link -> Prod Environment link
+	5. change runs-on: from windows-latest to Ubuntu-latest
+	6. change Pack Solution version to @v0
+	7. Start Commit
+	8. Add comments
+	9. Commit new file
+	10. Click <>Code
+		a. click <>Code --> Codespaces --> select Codespace listed
+	11. Commit changes from the codespace -> click Yes -> Sync -> Ok -> Yes 
+	12. Click files in Activity Panel -> controls/LinearInputControl
+	13. Open solution/mysolution -> click hamburger -> Go to Repository
+	14. Verify solution/mysolution is having bin/debug/ folders
+		○ if not, goto Codespaces -> select Codespace
+		○ open Terminal -> New Terminal
+		○ cd solution
+		○ cd mysolution
+		○ dotnet build -> once complete
+		○ open .gitignore
+			§ The file shows msbuild output directories. 
+			§ This lists all the files to ignore, including Alejandro's bin and obj folders and their contents so he'll remove the entries.
+		○ remove the ignored directories -> save
+		○ commit -> comment -> sync -> Ok
+		○ goto file extentions
+		○ click hamburger -> Go to Repository
+		○ click solution/mysolution
+			§ you should now see bin/Debug folder -> open folder and you should see mysolution.zip
+		○ click on Actions -> release-solution-to-prod -> Run workflow -> change name to mysolution, staging to the path where mysolution.zip is located
+		○ click Run workflow
+		○ click workflow
+			§ convert-to-manage
+			§ release-to-staging
+		○ workflow is now complete
+		○ goto <>Code
+		○ goto maker portal -> select Prod environment -> click Solutions -> you should see 'mysolution' there (as managed)
+
+In Contoso prod environment solutions, Alejandro sees mysolution and this time the Managed externally column shows as locked. 
+This is now managed externally as part of a managed solution and locked, meaning the artifact is immutable.
+
+Alejandro has built a solution and initiated a control, then incorporated them and built them together.
+
+He then imported them into a dev environment, made changes, and persisted that back into source. 
+He built the artifact, but instead of manually importing into a target environment, he ran it through 
+a pipeline initiated within GitHub itself. This took the artifact through different stages: from dev to build to prod. 
+
+Finally, in prod he deployed the artifact, not as an unmanaged artifact, but as a managed one, as in it is immutable.	
+
+	15. goto Dev Environment -> Solutions -> you should see that 'mysolution' is unmanaged.
