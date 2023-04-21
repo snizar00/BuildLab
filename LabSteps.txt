@@ -41,7 +41,14 @@ which he drags from his desktop and drops into the LinearInputControl folder.
 		○ cd mysolution
 		○ pac solution add-reference --path ../../controls/LinearInputControl/
 		○ clear
-		○ dotnet build
+		
+		pac org list
+		pac org select -env https://org3a90ea5c.crm.dynamics.com
+		// go to control/DynamicTextInput folder
+		pac pcf push -pp Dyntext
+				
+		
+		SKIP ○ dotnet build
 	26. In the explorer blad, open solutions/mysolution/bin/debug/
 		○ you can see mysolution.zip
 		○ open src/Other folder
