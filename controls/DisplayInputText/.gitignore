@@ -10,7 +10,7 @@
 /out
 
 # msbuild output directories
-/bin
+#/bin
 #/obj
 
 # MSBuild Binary and Structured Log
