@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "dgSpecHash": "cCS4XJ5ntCoHnUd7xnvvukmFdb37P7hhTnUgVKbZLiCTjcVen2kEyJftFNcf9autoA0+QjyqNQPJqAaBtFLBMQ==",
+  "success": true,
+  "projectFilePath": "/workspaces/BuildLab/controls/DisplayInputText/DisplayInputText.pcfproj",
+  "expectedPackageFiles": [
+    "/home/codespace/.nuget/packages/microsoft.netframework.referenceassemblies/1.0.0/microsoft.netframework.referenceassemblies.1.0.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.netframework.referenceassemblies.net462/1.0.0/microsoft.netframework.referenceassemblies.net462.1.0.0.nupkg.sha512",
+    "/home/codespace/.nuget/packages/microsoft.powerapps.msbuild.pcf/1.22.4/microsoft.powerapps.msbuild.pcf.1.22.4.nupkg.sha512"
+  ],
+  "logs": []
+}

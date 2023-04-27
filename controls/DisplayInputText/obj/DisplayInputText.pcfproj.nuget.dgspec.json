@@ -1,0 +1,50 @@
+{
+  "format": 1,
+  "restore": {
+    "/workspaces/BuildLab/controls/DisplayInputText/DisplayInputText.pcfproj": {}
+  },
+  "projects": {
+    "/workspaces/BuildLab/controls/DisplayInputText/DisplayInputText.pcfproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/workspaces/BuildLab/controls/DisplayInputText/DisplayInputText.pcfproj",
+        "projectName": "DisplayInputText",
+        "projectPath": "/workspaces/BuildLab/controls/DisplayInputText/DisplayInputText.pcfproj",
+        "packagesPath": "/home/codespace/.nuget/packages/",
+        "outputPath": "/workspaces/BuildLab/controls/DisplayInputText/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/codespace/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net462"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net462": {
+            "targetAlias": "net462",
+            "projectReferences": {}
+          }
+        }
+      },
+      "frameworks": {
+        "net462": {
+          "targetAlias": "net462",
+          "dependencies": {
+            "Microsoft.NETFramework.ReferenceAssemblies": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[1.0.0, )"
+            },
+            "Microsoft.PowerApps.MSBuild.Pcf": {
+              "target": "Package",
+              "version": "[1.*, )"
+            }
+          }
+        }
+      }
+    }
+  }
+}
