@@ -1,0 +1,1 @@
+/workspaces/BuildLab/solutions/mysolution/obj/Debug/mysolution.cdsproj.CoreCompileInputs.cache

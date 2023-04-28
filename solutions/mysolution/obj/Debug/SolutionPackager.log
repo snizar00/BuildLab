@@ -1,0 +1,19 @@
+2023-04-28 18:40:16.148 - Info	
+Packing /workspaces/BuildLab/solutions/mysolution/obj/Debug/Metadata to bin/Debug/mysolution.zip
+
+2023-04-28 18:40:16.179 - Info	Processing Component: Entities
+2023-04-28 18:40:16.185 - Info	Processing Component: Roles
+2023-04-28 18:40:16.188 - Info	Processing Component: Workflows
+2023-04-28 18:40:16.190 - Info	Processing Component: FieldSecurityProfiles
+2023-04-28 18:40:16.192 - Info	Processing Component: Templates
+2023-04-28 18:40:16.193 - Info	Processing Component: EntityMaps
+2023-04-28 18:40:16.195 - Info	Processing Component: EntityRelationships
+2023-04-28 18:40:16.199 - Info	Processing Component: OrganizationSettings
+2023-04-28 18:40:16.201 - Info	Processing Component: optionsets
+2023-04-28 18:40:16.203 - Info	Processing Component: CustomControls
+2023-04-28 18:40:16.212 - Info	 - DisplayInputText.DisplayInputText
+2023-04-28 18:40:16.223 - Info	Processing Component: SolutionPluginAssemblies
+2023-04-28 18:40:16.224 - Info	Processing Component: EntityDataProviders
+2023-04-28 18:40:16.264 - Info	
+Unmanaged Pack complete.
+
