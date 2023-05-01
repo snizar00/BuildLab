@@ -8,7 +8,7 @@ on:
 permissions:
   contents: write
 jobs:
-  Release-solution-ALMLab:
+  Release-solution-BuildLab:
     # uses: ./.github/workflows/release-solution-with-inputs.yml
     uses: ./.github/workflows/release-solution-to-prod.yml
     with:
