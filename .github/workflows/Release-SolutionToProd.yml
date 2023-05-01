@@ -3,8 +3,16 @@ name: Release to prod action
 # Release your solution to prod when you create a new release.
 
 on:
-  release:
-      types: [created]        
+#  release:
+#      types: [created]        
+  workflow_dispatch:
+    inputs:
+      # Change this value
+      solution_name:
+        description: 'name of the solution to worked on from Power Platform'
+        required: true
+        default: TestLabSolution
+        
 permissions:
   contents: write
 
