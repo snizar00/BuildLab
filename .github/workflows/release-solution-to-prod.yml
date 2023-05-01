@@ -19,7 +19,8 @@ on:
       solution_outbound_folder:
         description: 'staging the unpacked solution folder before check-in *do not change*'
         type: string
-        default: out/solutions/
+        default: solutions/
+        # default: out/solutions/
       solution_source_folder: 
        description: 'folder name to be created and checked in *do not change*'
        type: string
