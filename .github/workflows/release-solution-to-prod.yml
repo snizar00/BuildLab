@@ -80,7 +80,7 @@ jobs:
         force-overwrite: true
         publish-changes: true
 
-    - name: Export solution as Unmanaged
+    - name: Export solution as managed
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
         environment-url: ${{inputs.BUILD_ENVIRONMENT_URL}}
@@ -88,7 +88,7 @@ jobs:
         client-secret: ${{ secrets.envSecret }} 
         tenant-id: ${{inputs.TENANT_ID}}
         solution-name: ${{ inputs.solution_name }}
-        managed: false
+        managed: true
         solution-output-file: ${{ inputs.solution_shipping_folder}}/${{ inputs.solution_name }}_managed.zip
 
     - name: Upload the ready to ship solution to GH artifact store
