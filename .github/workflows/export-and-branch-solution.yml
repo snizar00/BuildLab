@@ -14,15 +14,18 @@ on:
       solution_exported_folder:
         description: 'folder name for staging the exported solution *do not change*'
         required: true
-        default: out/exported/
+        # default: out/exported/
+        default: solutions/TestLabSolution/
       solution_folder:
         description: 'staging the unpacked solution folder before check-in *do not change*'
         required: true
-        default: out/solutions/
+        # default: out/solutions/
+        default: out/solutions/TestLabSolution/
       solution_target_folder: 
        description: 'folder name to be created and checked in *do not change*'
        required: true
-       default: solutions/
+       # default: solutions/
+       default: solutions/TestLabSolution/
 env:
 #edit your values here
   ENVIRONMENT_URL: 'https://org9f482106.crm.dynamics.com/'  # BuildLabProd
