@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <CanvasApp xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Name>tlp_testpcfapp_c5b69</Name>
-  <AppVersion>2023-05-01T17:17:47Z</AppVersion>
+  <AppVersion>2023-05-01T22:54:25Z</AppVersion>
   <Status>Ready</Status>
   <CreatedByClientVersion>3.23043.16.0</CreatedByClientVersion>
   <MinClientVersion>3.23043.16.0</MinClientVersion>
@@ -10,9 +10,9 @@
   <GalleryItemId xsi:nil="true"></GalleryItemId>
   <BackgroundColor>RGBA(0,176,240,1)</BackgroundColor>
   <DisplayName>TestPCFApp</DisplayName>
-  <Description xsi:nil="true"></Description>
-  <CommitMessage xsi:nil="true"></CommitMessage>
-  <Publisher xsi:nil="true"></Publisher>
+  <Description></Description>
+  <CommitMessage></CommitMessage>
+  <Publisher></Publisher>
   <AuthorizationReferences>[]</AuthorizationReferences>
   <ConnectionReferences>{}</ConnectionReferences>
   <DatabaseReferences>{}</DatabaseReferences>
