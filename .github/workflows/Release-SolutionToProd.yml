@@ -5,13 +5,34 @@ name: Release to prod action
 on:
 #  release:
 #      types: [created]        
-  workflow_dispatch:
+  workflow_call:
     inputs:
       # Change this value
       solution_name:
         description: 'name of the solution to worked on from Power Platform'
         required: true
+        type: string
         default: TestLabSolution
+      BUILD_ENVIRONMENT_URL:
+        description: 'Build environment url.'
+        type: string
+        required: true      
+      PRODUCTION_ENVIRONMENT_URL: 
+        description: 'Production environment url.'
+        type: string
+        required: true
+      CLIENT_ID: 
+        description: 'The client id'
+        type: string
+        required: true
+      TENANT_ID: 
+        description: 'The tenant id'
+        type: string
+        required: true
+    secrets:
+      envSecret:
+        description: 'The secret value for authentication using SPN'
+        required: true
         
 permissions:
   contents: write
@@ -49,7 +70,7 @@ jobs:
       with:
         environment-url: ${{inputs.BUILD_ENVIRONMENT_URL}}
         app-id: ${{inputs.CLIENT_ID}}
-        client-secret: ${{ secrets.PowerPlatformSPN }}
+        client-secret: ${{ secrets.envSecret }}
         tenant-id: ${{inputs.TENANT_ID}}
         solution-file: out/solutions/TestLabSolution.zip
         force-overwrite: true
@@ -60,7 +81,7 @@ jobs:
       with:
         environment-url: ${{inputs.BUILD_ENVIRONMENT_URL}}
         app-id: ${{inputs.CLIENT_ID}}
-        client-secret: ${{ secrets.PowerPlatformSPN }}
+        client-secret: ${{ secrets.envSecret }}
         tenant-id: ${{inputs.TENANT_ID}}
         solution-name: TestLabSolution
         managed: true
@@ -94,7 +115,7 @@ jobs:
       with:
         environment-url: ${{inputs.PRODUCTION_ENVIRONMENT_URL}}
         app-id: ${{inputs.CLIENT_ID}}
-        client-secret: ${{ secrets.PowerPlatformSPN }}
+        client-secret: ${{ secrets.envSecret }}
         tenant-id: ${{inputs.TENANT_ID}}
         solution-file: out/release/TestLabSolution_managed.zip
         force-overwrite: true
