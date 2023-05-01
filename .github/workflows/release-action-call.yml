@@ -15,8 +15,8 @@ jobs:
       #You can specify the solution name here
       solution_name: mysolution
       #Update your values here
-      BUILD_ENVIRONMENT_URL: 'https://orgc095e7ce.crm.dynamics.com'
-      PRODUCTION_ENVIRONMENT_URL: 'https://org9f482106.crm.dynamics.com '
+      BUILD_ENVIRONMENT_URL: 'https://org9f482106.crm.dynamics.com/'  # BuildLabProd
+      PRODUCTION_ENVIRONMENT_URL: 'https://org80c248df.crm.dynamics.com/'  # TestLab
       CLIENT_ID: 'a88b1599-590d-4b7a-ace1-229dea7fc826'
       TENANT_ID: 'c9f44141-61a3-483a-b157-783e86287e36'     
     secrets:
