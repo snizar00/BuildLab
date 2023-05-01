@@ -120,3 +120,4 @@ jobs:
         solution-file: out/release/TestLabSolution_managed.zip
         force-overwrite: true
         publish-changes: true
+        managed: true
