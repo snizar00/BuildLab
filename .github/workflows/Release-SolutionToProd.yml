@@ -3,9 +3,10 @@ name: Release to prod action
 # Release your solution to prod when you create a new release.
 
 on:
-  release:
-      types: [created]        
-  workflow_call:
+#  release:
+#      types: [created]        
+#  workflow_call:
+  workflow_dispatch:
     inputs:
       # Change this value
       solution_name:
