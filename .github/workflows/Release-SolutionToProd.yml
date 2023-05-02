@@ -55,8 +55,8 @@ jobs:
     - name: Pack solution
       uses: microsoft/powerplatform-actions/pack-solution@v0
       with:
-        solution-folder: solutions/TestSolution
-        solution-file: out/solutions/TestSolution.zip
+        solution-folder: solutions/MySolution
+        solution-file: out/solutions/MySolution.zip
         solution-type: Unmanaged
 
 #    - name: Import solution as unmanaged to build env
@@ -66,7 +66,7 @@ jobs:
 #        app-id: ${{env.CLIENT_ID}}
 #        client-secret: ${{ secrets.PowerPlatformSPN }}
 #        tenant-id: ${{env.TENANT_ID}}
-#        solution-file: out/solutions/TestSolution.zip
+#        solution-file: out/solutions/MySolution.zip
 #        force-overwrite: true
 #        publish-changes: true
 
@@ -77,15 +77,15 @@ jobs:
         app-id: ${{env.CLIENT_ID}}
         client-secret: ${{ secrets.PowerPlatformSPN }}
         tenant-id: ${{env.TENANT_ID}}
-        solution-name: TestSolution
+        solution-name: MySolution
         managed: true
-        solution-output-file: out/ship/TestSolution_managed.zip
+        solution-output-file: out/ship/MySolution_managed.zip
 
     - name: Upload the ready to ship solution to GH artifact store
       uses: actions/upload-artifact@v2
       with:
         name: managedSolutions
-        path: out/ship/TestSolution_managed.zip
+        path: out/ship/MySolution_managed.zip
 
   release-to-prod:
     needs: [ convert-to-managed ]
@@ -111,7 +111,7 @@ jobs:
         app-id: ${{env.CLIENT_ID}}
         client-secret: ${{ secrets.PowerPlatformSPN }}
         tenant-id: ${{env.TENANT_ID}}
-        solution-file: out/release/TestSolution_managed.zip
+        solution-file: out/release/MySolution_managed.zip
         force-overwrite: true
         publish-changes: true
         managed: true
