@@ -73,10 +73,10 @@ jobs:
     - name: Export solution as managed
       uses: microsoft/powerplatform-actions/export-solution@v0
       with:
-        environment-url: ${{inputs.BUILD_ENVIRONMENT_URL}}
-        app-id: ${{inputs.CLIENT_ID}}
+        environment-url: ${{env.BUILD_ENVIRONMENT_URL}}
+        app-id: ${{env.CLIENT_ID}}
         client-secret: ${{ secrets.PowerPlatformSPN }}
-        tenant-id: ${{inputs.TENANT_ID}}
+        tenant-id: ${{env.TENANT_ID}}
         solution-name: TestSolution
         managed: true
         solution-output-file: out/ship/TestSolution_managed.zip
@@ -107,10 +107,10 @@ jobs:
     - name: Import solution to prod env
       uses: microsoft/powerplatform-actions/import-solution@v0
       with:
-        environment-url: ${{inputs.PRODUCTION_ENVIRONMENT_URL}}
-        app-id: ${{inputs.CLIENT_ID}}
+        environment-url: ${{env.PRODUCTION_ENVIRONMENT_URL}}
+        app-id: ${{env.CLIENT_ID}}
         client-secret: ${{ secrets.PowerPlatformSPN }}
-        tenant-id: ${{inputs.TENANT_ID}}
+        tenant-id: ${{env.TENANT_ID}}
         solution-file: out/release/TestSolution_managed.zip
         force-overwrite: true
         publish-changes: true
