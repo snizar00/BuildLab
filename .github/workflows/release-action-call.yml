@@ -3,8 +3,9 @@ name: Release action
 # Release your solution to prod when you create a new release.
 
 on:
-  release:
-      types: [created]        
+#  release:
+#      types: [created]        
+
 permissions:
   contents: write
 jobs:
