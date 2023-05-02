@@ -7,33 +7,30 @@ on:
 #      types: [created]        
 #  workflow_call:
   workflow_dispatch:
-#    inputs:
+    inputs:
       # Change this value
-#      solution_name:
-#        description: 'name of the solution to worked on from Power Platform'
-#        required: true
+      solution_name:
+        description: 'name of the solution to worked on from Power Platform'
+        required: true
 #        type: string
-#        default: TestSolution
-#      BUILD_ENVIRONMENT_URL:
-#        description: 'Build environment url.'
+        default: TestSolution
+      BUILD_ENVIRONMENT_URL:
+        description: 'Build environment url.'
 #        type: string
-#        required: true      
-#      PRODUCTION_ENVIRONMENT_URL: 
-#        description: 'Production environment url.'
+        required: true      
+      PRODUCTION_ENVIRONMENT_URL: 
+        description: 'Production environment url.'
 #        type: string
-#        required: true
-#      CLIENT_ID: 
-#        description: 'The client id'
+        required: true
+      CLIENT_ID: 
+        description: 'The client id'
 #        type: string
-#        required: true
-#      TENANT_ID: 
-#        description: 'The tenant id'
+        required: true
+      TENANT_ID: 
+        description: 'The tenant id'
 #        type: string
-#        required: true
+        required: true
         
-permissions:
-  contents: write
-
 env:
       #You can specify the solution name here
       solution_name: TestSolution
@@ -43,7 +40,8 @@ env:
       CLIENT_ID: 'a88b1599-590d-4b7a-ace1-229dea7fc826'
       TENANT_ID: 'c9f44141-61a3-483a-b157-783e86287e36'     
       
-
+permissions:
+  contents: write
 jobs:
   convert-to-managed:
     runs-on: windows-latest
