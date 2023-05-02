@@ -32,8 +32,6 @@ on:
         required: true
         
 env:
-      #You can specify the solution name here
-      solution_name: TestSolution
       #Update your values here
       BUILD_ENVIRONMENT_URL: 'https://org9f482106.crm.dynamics.com/'  # BuildLabProd
       PRODUCTION_ENVIRONMENT_URL: 'https://org80c248df.crm.dynamics.com/'  # TestLab
@@ -64,10 +62,10 @@ jobs:
     - name: Import solution as unmanaged to build env
       uses: microsoft/powerplatform-actions/import-solution@v0
       with:
-        environment-url: ${{inputs.BUILD_ENVIRONMENT_URL}}
-        app-id: ${{inputs.CLIENT_ID}}
+        environment-url: ${{env.BUILD_ENVIRONMENT_URL}}
+        app-id: ${{env.CLIENT_ID}}
         client-secret: ${{ secrets.PowerPlatformSPN }}
-        tenant-id: ${{inputs.TENANT_ID}}
+        tenant-id: ${{env.TENANT_ID}}
         solution-file: out/solutions/TestSolution.zip
         force-overwrite: true
         publish-changes: true
