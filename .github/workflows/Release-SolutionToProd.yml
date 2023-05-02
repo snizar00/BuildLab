@@ -13,7 +13,7 @@ on:
         description: 'name of the solution to worked on from Power Platform'
         required: true
 #        type: string
-        default: TestSolution
+        default: MySolution
 #      BUILD_ENVIRONMENT_URL:
 #        description: 'Build environment url.'
 #        type: string
