@@ -7,29 +7,29 @@ on:
 #      types: [created]        
 #  workflow_call:
   workflow_dispatch:
-    inputs:
+#    inputs:
       # Change this value
-      solution_name:
-        description: 'name of the solution to worked on from Power Platform'
-        required: true
-        type: string
-        default: TestSolution
-      BUILD_ENVIRONMENT_URL:
-        description: 'Build environment url.'
-        type: string
-        required: true      
-      PRODUCTION_ENVIRONMENT_URL: 
-        description: 'Production environment url.'
-        type: string
-        required: true
-      CLIENT_ID: 
-        description: 'The client id'
-        type: string
-        required: true
-      TENANT_ID: 
-        description: 'The tenant id'
-        type: string
-        required: true
+#      solution_name:
+#        description: 'name of the solution to worked on from Power Platform'
+#        required: true
+#        type: string
+#        default: TestSolution
+#      BUILD_ENVIRONMENT_URL:
+#        description: 'Build environment url.'
+#        type: string
+#        required: true      
+#      PRODUCTION_ENVIRONMENT_URL: 
+#        description: 'Production environment url.'
+#        type: string
+#        required: true
+#      CLIENT_ID: 
+#        description: 'The client id'
+#        type: string
+#        required: true
+#      TENANT_ID: 
+#        description: 'The tenant id'
+#        type: string
+#        required: true
         
 permissions:
   contents: write
