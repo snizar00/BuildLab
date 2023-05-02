@@ -11,7 +11,7 @@ permissions:
 jobs:
   Release-solution-BuildLab:
     # uses: ./.github/workflows/release-solution-with-inputs.yml
-    uses: ./.github/workflows/release-solution-to-prod.yml
+    # uses: ./.github/workflows/release-solution-to-prod.yml
     with:
       #You can specify the solution name here
       solution_name: TestLabSolution
