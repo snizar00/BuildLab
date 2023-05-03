@@ -1,1 +1,0 @@
-/workspaces/BuildLab/controls/DisplayInputText/obj/Debug/DisplayInputText.pcfproj.CoreCompileInputs.cache
