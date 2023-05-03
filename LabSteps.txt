@@ -1,119 +1,182 @@
-Steps:
-First Part
-	1. login to GitHub
-	2. create workspace
-	3. click code (to clone a repo) --> Codespaces -> New codespace
-	4. Click extensions -> Search Power Platform -> install PPTools in codespace
-	5. click 'pac' in terminal to verify
-	6. click on PPTools in left bar and type:
-		○ pac auth create --url https://contosodev1.crm.dynamics.com -dc
-	7. Copy CODE and click link -> paste code to login -> select user -> close TAB
-	8. terminal -> clear
-	9. Refresh Auth -> you will see all profiles + environments
-		○ you should see 3 environments (build, dev, prod)
-	10. select 'auth' profile and star it
-	11. goto file tab
-	12. mkdir solutions
-	13. mkdir controls
-	14. cd solutions -> ls
-	15. mkdir mysolution
-	16. cd mysolution
-	17. (step-33/69) pac solution init -pp mysol -pn MySolution -o ./.
-	18. ls -l
-	19. cd controls
-	20. cd LinearInputControl
-	21. pac pcf init -ns LinearInputControl -n LinearInputControl -o ./. -npm --template field
+Use GitHub codespace and build a PCF control:
+---------------------------------------------
+•	Log-in to GitHub, create a new workspace then create a new Codespace.
+•	Install Extension Power Platform Tools (PAC CLI).
 
-The code installed the relevant NPM libraries needed to build and found 0 vulnerabilities. 
-Since Alejandro's JavaScript skills are minimal, he uses a sample JavaScript file, 
-which he drags from his desktop and drops into the LinearInputControl folder.
+Click on Extensions  >  Search “Power Platform Tools”  >  click Install.
+•	In the Codespace terminal, type 'pac' to test installation of Power Platform Tools.
+•	Create a connection with Power Platform.
 
-	22. Copy linear control folder into LinearInputControl folder
-	23. In terminal type
-		○ npm run build
-		○ npm run start
-		○ open in browser
-	24. upon verification, close the tab
-	25. In terminal type
-		○ cd ..
-		○ cd ..
-		○ cd solutions
-		○ cd mysolution
-		○ pac solution add-reference --path ../../controls/LinearInputControl/
-		○ clear
-		
-		pac org list
-		pac org select -env https://org3a90ea5c.crm.dynamics.com
-		// go to control/DynamicTextInput folder
-		pac pcf push -pp Dyntext
-				
-		
-		SKIP ○ dotnet build
-	26. In the explorer blad, open solutions/mysolution/bin/debug/
-		○ you can see mysolution.zip
-		○ open src/Other folder
-		○ open Customizations.xml
-		○ open Relationships.xml
-		○ open Solution.xml
-			§ Solution.xml has actually received information because Alejandro associated the PCF control directly into the solution so it has that reference.
-		○ open index.ts in controls/LinearInputControl
-			§ The index.ts file is the TypeScript file used to build the JavaScript module
-		○ use 'pac solution import' to being the zip file into the Dev environment
-		○ pac solution import --path ./bin/Debug/mysolution.zip
-	27. Open maker portal -> Dev Environment -> Solutions -> You can see the solution, Click mysolution -> you can see the custom control.
-
-
-Second Part
-	1. Open GitHub Marketplace --> Power Platform --> powerplatform-actions --> 'Use latest version' --> choose top version
-	2. Click <> Code --> Actions --> set up a workflow yourself
-	3. Copy/Paste "release-solution-to-prod.yml"
-		a. Copy the Action name and paste that as the YAML file name.
+	pac auth create -dc
 	
-	************ Need to get below information from Azure from the App Registration ************
-	4. Copy Tenant ID -> Client ID -> Build Environment link -> Prod Environment link
-	5. change runs-on: from windows-latest to Ubuntu-latest
-	6. change Pack Solution version to @v0
-	7. Start Commit
-	8. Add comments
-	9. Commit new file
-	10. Click <>Code
-		a. click <>Code --> Codespaces --> select Codespace listed
-	11. Commit changes from the codespace -> click Yes -> Sync -> Ok -> Yes 
-	12. Click files in Activity Panel -> controls/LinearInputControl
-	13. Open solution/mysolution -> click hamburger -> Go to Repository
-	14. Verify solution/mysolution is having bin/debug/ folders
-		○ if not, goto Codespaces -> select Codespace
-		○ open Terminal -> New Terminal
-		○ cd solution
-		○ cd mysolution
-		○ dotnet build -> once complete
-		○ open .gitignore
-			§ The file shows msbuild output directories. 
-			§ This lists all the files to ignore, including Alejandro's bin and obj folders and their contents so he'll remove the entries.
-		○ remove the ignored directories -> save
-		○ commit -> comment -> sync -> Ok
-		○ goto file extentions
-		○ click hamburger -> Go to Repository
-		○ click solution/mysolution
-			§ you should now see bin/Debug folder -> open folder and you should see mysolution.zip
-		○ click on Actions -> release-solution-to-prod -> Run workflow -> change name to mysolution, staging to the path where mysolution.zip is located
-		○ click Run workflow
-		○ click workflow
-			§ convert-to-manage
-			§ release-to-staging
-		○ workflow is now complete
-		○ goto <>Code
-		○ goto maker portal -> select Prod environment -> click Solutions -> you should see 'mysolution' there (as managed)
+Copy code and go to the link to validate login.
 
-In Contoso prod environment solutions, Alejandro sees mysolution and this time the Managed externally column shows as locked. 
-This is now managed externally as part of a managed solution and locked, meaning the artifact is immutable.
+Create and build a code component:
+----------------------------------
+This article demonstrates how to create and deploy code components using Microsoft Power Platform CLI.
 
-Alejandro has built a solution and initiated a control, then incorporated them and built them together.
+In the Codespace terminal, type:
+	pac org list
+	pac org select -env <ENVIRONMENT URL>
+	pac org who
+	clear
+	mkdir solutions
+	mkdir controls
+	cd solutions
+	mkdir MySolution
 
-He then imported them into a dev environment, made changes, and persisted that back into source. 
-He built the artifact, but instead of manually importing into a target environment, he ran it through 
-a pipeline initiated within GitHub itself. This took the artifact through different stages: from dev to build to prod. 
+To create and import a solution file:
+1.	Create two new folders inside the lab folder path:
 
-Finally, in prod he deployed the artifact, not as an unmanaged artifact, but as a managed one, as in it is immutable.	
+	mkdir controls
+	mkdir solutions
 
-	15. goto Dev Environment -> Solutions -> you should see that 'mysolution' is unmanaged.
+2.	Navigate into the directory to create additional folder MySolution: 
+
+	cd solutions
+	mkdir MySolution
+
+3.	Navigate into the MySolution directory. 
+4.	Create a new solution project using the command below. The solution project is used for bundling the code component into a solution zip file that is used for importing into Dataverse.
+
+	pac solution init -pp mysol -pn MySolution -o ./.
+	ls -l
+	
+5.	Navigate into the controls directory and create folder for the PCF control. 
+
+	cd controls 
+	mkdir DisplayInputText
+	cd DisplayInputText
+	
+6.	Create a new solution project using the command below.
+
+	pac pcf init -ns DisplayInputText -n DisplayInputText -o ./. -npm --template field
+	
+7.	Start the test for the blank solution using the commands below. 
+
+	npm run build
+	npm start
+	NOTE: If the web page does not show anything, just refresh (F5) the page.
+
+8.	Once verified, close the browser tab with blank solution test and come back to Codespace and press Ctrl-C to close the process.
+9.	Navigate to controls folder and type:
+
+	cd DisplayInputText
+	mkdir css
+	mkdir strings
+	
+	NOTE:
+	1.	Copy the file DisplayInputText.css from the lab folder into css folder.
+	2.	Copy the file DisplayInputText.1033.resx from the lab folder into strings folder.
+	3.	Copy the contents of the file index.ts from the lab folder into controls/DisplayInputText/DisplayInputText/index.ts file.
+
+10.	Navigate into the DisplayInputText directory within controls directory and type.
+
+	npm run build
+	npm start
+	
+11.	Once verified, close the browser tab with PCF Code test and come back to Codespace and press Ctrl-C to close the process.
+12.	Navigate into the mysolution directory within solutions directory. Then use the command below to add reference to the control.
+
+	pac solution add-reference --path ../../controls/DisplayInputText/
+	
+13.	Create the build while in mysolution directory using the command: 
+
+	dotnet build
+	
+14.	Ensure you are connected with Power Platform environments by using the below set of commands.
+
+	pac org who
+
+NOTE: If you do not see Org URL/user email/etc then log-in using
+
+	pac auth create
+	pac org list
+	pac org select -env <DEV_ENVIRONMENT_URL>
+
+Push Code Component into a DEV environment.
+------------------------------------------
+1.	Navigate into the PCF Control directory: 
+
+	cd solutions
+	cd MySolution
+2.	In In the explorer blade, open solutions/MySolution/bin/Debug/
+3.	You should see MySolution.zip 
+4.	Open src/Other folder to view the below XML files.
+
+	Customizations.xml
+	Relationships.xml
+	Solution.xml
+	Solution.xml has actually received information because we associated the PCF control directly into the solution, so it has that reference.
+
+5.	Navigate to MySolution folder and type below command to import solution into Dev environment.
+
+	pac solution import --path ./bin/Debug/MySolution.zip
+
+6.	Open maker portal  >  Select Dev Environment  >  Click Solutions  >  You can see the solution.
+7.	Click MySolution  >  you should see the custom control.
+
+Add components to a Canvas App
+------------------------------
+1.	Go to Power Apps Studio.
+2.	Create a new Canvas app to add the code component.
+	NOTE: Make sure the solution .zip file containing the code components has already been imported into Microsoft Dataverse before you proceed to the next step.
+3.	On the left pane, select Add (+), and then select Get more components. You can also add components by selecting Insert > Custom > Import component.
+4.	Select the Code tab, select a component from the list, and then select Import.
+5.	On the left pane, select +, expand Code components, and then select the component to add it to the app.
+
+*** IMPORTANT ***
+Make sure to change the Environment Setting (for both environments in PPAC) using PRODUCT  >  FEATURES to allow import of components to Canvas apps.
+
+Power Apps component framework for canvas apps  >  Allow publishing of canvas apps with code components.
+5. Add the PCF control to an app in your solution. 
+
+Create a new Canvas app.
+------------------------
+	Click New App  >  select Canvas app  >  call it TestPCFApp  >  click Create  >  click Skip
+	Click Components  >  select Import components  >  click Code  >  select DisplayInputText  >  click Import. 
+	Click Tree view  >  select Screens  >  click Insert  >  select Text Label  >  Adjust size (1290x83)  >  Font size (20)  >  Font weight (Bold)  >  Text alignment (Center)  >  Text (BuildLab PCF Test)
+	Click Insert  >  select Code components  >  select DisplayInputText  >  select Center  >  Adjust size  >  click Save  >  click Play  >  Test  >  click Publish  >  click Close  >  click Back  >  leave.
+
+Create App registration in Azure portal.
+---------------------------------------
+Create App Registration
+1.	Go to Azure portal (https://portal.azure.com)
+2.	Select Azure Active Directory
+3.	Select App Registration from the left blade.
+4.	Select New registration
+5.	Type BuildLabRegistration  >  click Register, write down/save below items.
+	Application (client) ID:	GUID
+	Object ID:			GUID
+	Directory (tenant) ID:		GUID
+	
+6.	Click Manifest  >  Change "allowPublicClient" to TRUE  >  click Save
+7.	Click API Permissions  >  click Add a permission  >  select APIs my organization uses  >  type Dataverse  >  click Delegate permissions  >  click user_impersonation  >  click Add permissions.
+8.	Click API Permissions  >  click Add a permission  >  select APIs my organization uses  >  select PowerApps-Advisor  >  click Delegate permissions  >  click user_impersonation  >  click Add permissions.
+9.	Click API Permissions  >  click Add a permission  >  select APIs my organization uses  >  select PowerApps Service  >  click Delegate permissions  >  click user_impersonation  >  click Add permissions.
+10.	Select Certificates & secrets  >  click New client secret  >  type BuildLabSecret  >  select 90 days (3-months)  >  click Add, , write down/save (Name, Value, Secret ID)
+
+Export the new app with PCF control to GitHub.
+----------------------------------------------
+Go to GitHub web page, click Settings  >  select Secrets and variables  >  select Actions  >  click New repository secret  >  Set name as PowerPlatformSPN  >  Paste Value (step-10 from App registration) into Secret  >  click Add secret.
+
+Click on <> Code  > click Actions  >  select set up a workflow yourself  >  Copy export-and-branch-solution.yml  from the lab folder  >  change line-12 (default: MySolution)  >  click Commit changes   >  click Commit changes. 
+
+Click on Actions   >  click on export-and-branch-solution   >  select Run workflow.
+
+Create a Pull request.
+----------------------
+Once the workflow (export-and-branch-solution) completes, Click on Pull request  >  select the branch that was just created  >  click Create pull request  >  click Create pull request  >  select Merge pull request  >  click Confirm merge.
+
+To confirm:
+Click on <> Code  >  click on solutions  >  click MySolution  >  click Other  >  you shall see XML files (Customizations.xml & Solution.xml, etc.)
+
+
+Have a GitHub workflow to deploy from Dev to Test
+-------------------------------------------------
+Click on <> Code  >  click Actions  >  click set up a workflow yourself  >  Copy Release-SolutionToProd.yml  from the lab folder  >  Apply changes for DEV/TEST environments, Solution name, TenantID, ClientID  >  click Commit changes   >  click Commit changes.
+
+Click on Actions   >  click on Release to prod action  >  select Run workflow.
+
+The last workflow consists of two parts, (a) convert-to-managed and (b) release-to-prod. 
+RESULT: Your solution shall be released to Test environment, and it will be a managed solution.
